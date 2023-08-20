@@ -1,3 +1,10 @@
+/*
+Covid 19 Data Exploration 
+
+Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types
+
+*/
+
 SELECT *
 FROM PortfolioCovid..Covid_Deaths
 ORDER BY 3, 4
@@ -82,7 +89,7 @@ JOIN PortfolioCovid..Covid_Vaccinations AS vac
 WHERE dea.continent IS NOT NULL
 ORDER BY 2,3
 
---Ue CTE
+--Using CTE to perform Calculation on Partition By in previous query
 WITH popvsvsc (continent, location, date, population, new_vaccinations, rollingPeopleVaccinations)
 AS (
 SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
@@ -97,7 +104,7 @@ SELECT * , (rollingPeopleVaccinations/population)*100
 FROM popvsvsc
 
 
---Temp table
+--Using Temp Table to perform Calculation on Partition By in previous query
 
 DROP TABLE IF EXISTS #percetagePopulationVaccinated
 CREATE TABLE #percetagePopulationVaccinated
